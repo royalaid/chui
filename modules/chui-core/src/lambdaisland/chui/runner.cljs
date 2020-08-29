@@ -352,8 +352,10 @@
          (p/let [ctx donep]
            (when-not (:done? run)
              (update-run assoc :terminated? true))
-           (callback ctx))
-         (callback nil))
+           (when callback
+            (callback ctx)))
+         (when callback
+          (callback nil)))
        ((:terminate! run)))
      (callback nil))))
 
